@@ -67,7 +67,7 @@ class Train_A():
 #                    pickle.dump(codes[1:], tmp)
 #                continue
 
-                gen_loss, dis_loss = gan_bar.train(gen_name='LSTM', epochs=800, num_samples=20, sequence_length_list=[5, 10, 15])
+                gen_loss, dis_loss = gan_bar.train(gen_name='CNN', epochs=800, num_samples=20, sequence_length_list=[5, 10, 15])
                 if gen_loss and dis_loss:
                     self.save_gen_dis_fig(gen_loss, dis_loss, self.result_dir + suffix + '_gen_dis_loss.png')
                     gan_bar.save_weights(self.result_dir + suffix + '.weights')
@@ -118,5 +118,5 @@ class Train_A():
         plt.savefig(fig_name)
         plt.clf()
 
-T = Train_A(base_dir = 'D:/tmp/')
-T('slave', 7)
+T = Train_A(base_dir = '/home/caofa/Documents/codes/git/')
+T('slave', None)
