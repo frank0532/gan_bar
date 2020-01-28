@@ -48,6 +48,7 @@ class Generator_LSTM(Model):
         self.dense_1 = Dense(units=self.output_dims * 2)
         self.attention = Attention()
         self.dense_2 = Dense(units=self.output_dims, activation='tanh')
+        
     def trim(self, bar_data):#ohlc
         return tf.clip_by_value(bar_data, \
                                 tf.expand_dims(bar_data[:, :, 2], axis=-1), \
