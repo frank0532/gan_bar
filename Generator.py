@@ -43,8 +43,8 @@ class Generator_LSTM(Model):
         self.batchnorm_c = BatchNormalization()
         self.batchnorm_3 = BatchNormalization()
         self.lstm_forward_init = LSTM(self.lstm_forward_dims, return_state=True)
-        self.lstm_forward = LSTM(self.lstm_forward_dims, return_state=True)
-        self.lstm_backward = LSTM(self.lstm_backward_dims, return_sequences=True)
+        self.lstm_forward = LSTM(self.lstm_forward_dims, return_state=True, activation='relu')
+        self.lstm_backward = LSTM(self.lstm_backward_dims, return_sequences=True, activation='relu')
         self.dense_1 = Dense(units=self.output_dims * 2)
         self.attention = Attention()
         self.dense_2 = Dense(units=self.output_dims, activation='tanh')
@@ -61,40 +61,3 @@ class Generator_LSTM(Model):
             _, h, c = self.lstm_forward(tf.reshape(h, [-1, 1, self.lstm_forward_dims]), initial_state=[h, c])
             bars.append(h)
         return self.lstm_backward(self.batchnorm_3(tf.stack(bars[::-1], axis=1), training))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
